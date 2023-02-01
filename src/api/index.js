@@ -6,7 +6,9 @@ export const baseUrl = 'http://localhost:5000/posts';
 
 export const fetchPosts = () => axios.get(baseUrl);
 
-// export const createPost = (newPost) => axios.post(baseUrl, newPost);
+export const createPost = (newPost) => axios.post(baseUrl, newPost);
+
+export const updatePost = (id, updatedPost) => axios.patch(`${baseUrl}/${id}`, updatedPost);
 
 
 // export const postApi = createApi({
