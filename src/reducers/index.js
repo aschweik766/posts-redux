@@ -1,29 +1,25 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import rootReducer from './rootReducer';
-import thunk from 'redux-thunk';
-import { applyMiddleware, createStore } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from '@redux-devtools/extension';
-
-// const composeEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
-
-// const store = createStore(rootReducer, composeEnhancer);
+// import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+// import rootReducer from './rootReducer';
+// import {reducers} from './rootReducer';
+// import thunkMiddleware from 'redux-thunk';
 
 // const store = configureStore({
-//     reducer: rootReducer,
-//     middleware: (getDefaultMiddleware),
-//   });
+//   reducer: reducers,
+//   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
+//   devTools: process.env.NODE_ENV !== 'production',
+
+// })
+
+// export default store;
 
 
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
-  devTools: process.env.NODE_ENV !== 'production',
+import { combineReducers } from '@reduxjs/toolkit';
+import posts from './posts';
 
-})
+// const rootReducer = combineReducers({
+//     posts: posts
+// });
 
-// Store has all of the default middleware added, _plus_ the logger middleware
+// export default rootReducer;
 
-export default store;
-
-
+export const reducers = combineReducers({ posts });

@@ -5,8 +5,9 @@ import * as api from '../api/index.js';
 export const getPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
-
+    console.log(data);
     dispatch({ type: FETCH_ALL, payload: data });
+
   } catch (error) {
     console.log(error.message);
   }
@@ -14,9 +15,9 @@ export const getPosts = () => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
   try {
-    const { data } = await api.createPost(post);
-
+    const { data } = await api.createNewPost(post);
     dispatch({ type: CREATE, payload: data });
+    console.log(data);
   } catch (error) {
     console.log(error.message);
   }

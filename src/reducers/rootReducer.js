@@ -1,8 +1,10 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import posts from './posts';
+// import { combineReducers } from '@reduxjs/toolkit';
+// import posts from './posts';
 
-const rootReducer = combineReducers({
-    posts: posts
-});
+// // const rootReducer = combineReducers({
+// //     posts: posts
+// // });
 
-export default rootReducer;
+// // export default rootReducer;
+
+// export const reducers = combineReducers({ posts });
