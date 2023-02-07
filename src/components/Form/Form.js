@@ -3,11 +3,10 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import useStyles from './styles';
-import { createPost, updatePost } from '../../actions/posts';
+import { createPostAction, updatePost } from '../../actions/posts';
 
-const Form = ({ currentId, setCurrentId }) => {
+const Form = ({ currentId, setCurrentId }, props) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
-  console.log(postData);
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -30,7 +29,8 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(postData));
+    dispatch(createPostAction(postData, props.history));
+    console.log('on submit' + JSON.stringify(postData) );
     // if (currentId === 0) {
     //   dispatch(createPost(postData));
     //   console.log(postData)
