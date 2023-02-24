@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import useStyles from './styles';
 import { createPostAction, updatePost } from '../../actions/posts';
+import { useNavigate } from 'react-router-dom';
 
-const Form = ({ currentId, setCurrentId }, props) => {
+const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useNavigate();
 
-  // useEffect(() => {
-  //   if (post) setPostData(post);
-  // }, [post]);
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
 
   const clear = () => {
     setCurrentId(0);
@@ -25,21 +27,19 @@ const Form = ({ currentId, setCurrentId }, props) => {
   const handleChange = (event) => {
     event.preventDefault()
     setPostData({...postData, [event.target.name]: event.target.value });
-};
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPostAction(postData, props.history));
-    console.log('on submit' + JSON.stringify(postData) );
-    // if (currentId === 0) {
-    //   dispatch(createPost(postData));
-    //   console.log(postData)
-    //   clear();
-    // } else {
-    //   dispatch(updatePost(currentId, postData));
-    //   console.log(postData)
-    //   clear();
-    // }
+    if (currentId === 0) {
+      dispatch(createPostAction(postData, history));
+      console.log('on submit CREATE' + JSON.stringify(postData) );
+      clear();
+    } else {
+      dispatch(updatePost(currentId, postData));
+      console.log('on submit UPDATE' + JSON.stringify(postData) + ' ' + currentId );
+      clear();
+    }
   };
 
   return (

@@ -9,7 +9,8 @@ export const fetchPosts = () => axios.get(baseUrl);
 export const createNewPost = (postData) => {
     return axios.post(baseUrl, postData);
 }
-export const updatePost = (id, updatedPost) => axios.patch(`${baseUrl}/${id}`, updatedPost);
+// export const updatePost = (id, updatedPost) => axios.put(`${baseUrl}/${id}`, updatedPost);
+// export const updatePost = (id, updatedPost) => axios.patch(`${baseUrl}/${id}`, updatedPost);
 
 export const likePost = (id) => axios.patch(`${baseUrl}/${id}/likePost`);
 
